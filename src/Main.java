@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
 
@@ -19,8 +18,8 @@ public class Main {
             );
         }
 
-         for (Person c : persons) {
-           System.out.println(c);
+        for (Person c : persons) {
+            System.out.println(c);
         }
 
         long adult = persons.stream()
@@ -38,17 +37,12 @@ public class Main {
 
         List<String> workable = persons.stream()
                 .filter(person -> person.getAge() > 17)
+                .filter(person -> person.getAge() < 66)
+                .filter(person -> person.getSex() == Sex.MAN ? true : person.getAge() <= 60)
                 .filter(person -> person.getEducation() == Education.HIGHER)
-                .filter(person -> person.getAge() < 66 || person.getSex() == Sex.MAN)
-                .filter(person -> person.getAge() < 61 || person.getSex() == Sex.WOMAN)
                 .map(person -> person.getFamily().toString())
                 .sorted(Comparator.comparing(person -> person.toString()))
                 .collect(Collectors.toList());
         System.out.println("Список работоспособных " + workable);
-
-
-
-
-
     }
 }
